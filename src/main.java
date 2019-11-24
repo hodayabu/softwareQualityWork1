@@ -9,8 +9,7 @@ public class main {
 
     public static void main(String[] args) throws IOException {
         HashSet<String> set=createNames();
-
-
+        System.out.println(CountSpecificString("Abb"));
     }
 
     private static HashSet<String> createNames() throws IOException {
@@ -31,5 +30,31 @@ public class main {
         String restOfTheString=name.substring(1,name.length());
         restOfTheString=restOfTheString.toLowerCase();
         return firstLetter+restOfTheString;
+    }
+
+    private static int CountSpecificString(String subString) throws IOException {
+        HashSet<String> names=createNames();
+        int countAppearanceOfSubString=0;
+
+        for(String name:names){
+            countAppearanceOfSubString+=checkSingleName(name,subString);
+        }
+        return countAppearanceOfSubString;
+    }
+
+    private static int checkSingleName(String name,String subString) {
+        int lastIndex = 0;
+        int count = 0;
+
+        while(lastIndex != -1){
+
+            lastIndex = name.indexOf(subString,lastIndex);
+
+            if(lastIndex != -1){
+                count ++;
+                lastIndex += subString.length();
+            }
+        }
+        return count;
     }
 }
