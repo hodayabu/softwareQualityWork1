@@ -57,4 +57,28 @@ public class main {
         }
         return count;
     }
+
+    public static void CountAllStrings(int length) throws IOException {
+
+        HashSet<String> names=createNames();  ////read all named from file
+        HashMap<String,Integer> allSubStrings=new HashMap<>();  //key=subString , value=num of appearances
+        for(String name:names )
+            count_Every_posible_Sub_String(allSubStrings,length,name);
+
+        //print the resuls
+        for(HashMap.Entry<String,Integer> entry: allSubStrings.entrySet())
+            System.out.println(entry.getKey()+":"+entry.getValue());
+    }
+
+    private static void count_Every_posible_Sub_String(HashMap<String, Integer> allSubStrings,int length,String name) {
+        for(int i=0;i+length<=name.length() ; i++){
+            String subString=name.substring(i,i+length);
+            if(allSubStrings.containsKey(subString))
+                allSubStrings.put(subString,allSubStrings.get(subString)+1);
+            else
+                allSubStrings.put(subString,1);
+        }
+
+
+    }
 }
